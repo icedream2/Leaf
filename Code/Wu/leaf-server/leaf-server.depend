@@ -1,0 +1,220 @@
+# depslib dependency file v1.0
+1374746159 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\identifier_recognition_imp.cpp
+	"Precompile.h"
+	"Leaf_identifier_imp.h"
+	"Leaf_util.h"
+	<array>
+
+1374483182 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\precompile.h
+	<cassert>
+	<utility>
+	<map>
+	<algorithm>
+	<boost/thread/future.hpp>
+	<boost/filesystem.hpp>
+	<boost/log/trivial.hpp>
+	<boost/log/core.hpp>
+	<boost/log/utility/setup.hpp>
+	<boost/log/sinks.hpp>
+	<boost/log/expressions.hpp>
+	<opencv2/core/core.hpp>
+	<opencv2/ml/ml.hpp>
+	<boost/archive/text_oarchive.hpp>
+	<boost/archive/text_iarchive.hpp>
+	<boost/serialization/map.hpp>
+	<boost/serialization/vector.hpp>
+	<boost/foreach.hpp>
+	<boost/range/adaptors.hpp>
+	<boost/range/algorithm.hpp>
+	<fstream>
+
+1364990751 f:\programs\opencv\opencv\build\include\opencv2\core\core.hpp
+	"opencv2/core/types_c.h"
+	"opencv2/core/version.hpp"
+	<limits.h>
+	<algorithm>
+	<cmath>
+	<cstddef>
+	<complex>
+	<map>
+	<new>
+	<string>
+	<vector>
+	<sstream>
+	"opencv2/core/operations.hpp"
+	"opencv2/core/mat.hpp"
+
+1365116152 f:\programs\opencv\opencv\build\include\opencv2\core\types_c.h
+	<assert.h>
+	<stdlib.h>
+	<string.h>
+	<float.h>
+	<stdint.h>
+	<intrin.h>
+	<emmintrin.h>
+	<fastmath.h>
+	<math.h>
+	<ipl.h>
+	<ipl/ipl.h>
+	"tegra_round.hpp"
+	"emmintrin.h"
+
+1365116152 f:\programs\opencv\opencv\build\include\opencv2\core\version.hpp
+
+1364597757 f:\programs\opencv\opencv\build\include\opencv2\core\operations.hpp
+	<string.h>
+	<limits.h>
+	<ext/atomicity.h>
+	<bits/atomicity.h>
+	<limits>
+
+1364990751 f:\programs\opencv\opencv\build\include\opencv2\core\mat.hpp
+	<limits.h>
+	<string.h>
+
+1364597759 f:\programs\opencv\opencv\build\include\opencv2\ml\ml.hpp
+	"opencv2/core/core.hpp"
+	<limits.h>
+	<map>
+	<string>
+	<iostream>
+
+1375090789 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_identifier_imp.h
+	"Precompile.h"
+	"Leaf_identifier.h"
+	<boost/property_tree/ptree.hpp>
+
+1375090643 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_identifier.h
+	<vector>
+	<map>
+	<string>
+
+1375068710 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_util.h
+	"Feature_view.h"
+	<algorithm>
+
+1375068653 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\feature_view.h
+	"Leaf_identifier.h"
+	<memory>
+	<cassert>
+
+1375090700 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_identifier.cpp
+	"Precompile.h"
+	"Leaf_identifier.h"
+	"Leaf_identifier_imp.h"
+	<stdexcept>
+
+1375090841 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_identifier_imp.cpp
+	"Precompile.h"
+	"Leaf_identifier_imp.h"
+	"Leaf_util.h"
+	<boost/property_tree/ptree.hpp>
+	<boost/property_tree/xml_parser.hpp>
+	<numeric>
+
+1376184161 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leafparse.cpp
+	"Leafparse.h"
+	"Leafparse_emp.h"
+	"Fetcher.h"
+	<opencv2/highgui/highgui.hpp>
+
+1376184161 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leafparse.h
+	<opencv2/imgproc/imgproc.hpp>
+	<vector>
+	<string>
+
+1364597758 f:\programs\opencv\opencv\build\include\opencv2\highgui\highgui.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/highgui/highgui_c.h"
+
+1364990751 f:\programs\opencv\opencv\build\include\opencv2\highgui\highgui_c.h
+	"opencv2/core/core_c.h"
+
+1364597757 f:\programs\opencv\opencv\build\include\opencv2\core\core_c.h
+	"opencv2/core/types_c.h"
+
+1364597758 f:\programs\opencv\opencv\build\include\opencv2\imgproc\imgproc.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/imgproc/types_c.h"
+
+1364597758 f:\programs\opencv\opencv\build\include\opencv2\imgproc\types_c.h
+	"opencv2/core/core_c.h"
+
+1374111147 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\precompile.cpp
+	"Precompile.h"
+
+1375253767 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\server_main.cpp
+	"Leaf_server.h"
+	<stdexcept>
+	<iostream>
+
+1375257859 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_server.h
+	<memory>
+	<boost/asio.hpp>
+
+1376189488 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leaf_server.cpp
+	"Precompile.h"
+	"Leaf_identifier.h"
+	"Leaf_server.h"
+	"Leafparse.h"
+	"Fetcher.h"
+	<memory>
+	<numeric>
+	<sstream>
+	<iterator>
+	<opencv2/highgui/highgui.hpp>
+	<boost/property_tree/ptree.hpp>
+	<boost/property_tree/json_parser.hpp>
+
+1376184161 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\fetcher.cpp
+	"Fetcher.h"
+	<opencv2/highgui/highgui.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/legacy/legacy.hpp>
+	<queue>
+
+1376184161 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\fetcher.h
+	<opencv2/imgproc/imgproc.hpp>
+	<vector>
+	<string>
+
+1364597758 f:\programs\opencv\opencv\build\include\opencv2\legacy\legacy.hpp
+	"opencv2/imgproc/imgproc.hpp"
+	"opencv2/imgproc/imgproc_c.h"
+	"opencv2/features2d/features2d.hpp"
+	"opencv2/calib3d/calib3d.hpp"
+	"opencv2/ml/ml.hpp"
+	<iosfwd>
+	<limits>
+
+1359328680 f:\programs\opencv\opencv\build\include\opencv2\imgproc\imgproc_c.h
+	"opencv2/core/core_c.h"
+	"opencv2/imgproc/types_c.h"
+
+1364597757 f:\programs\opencv\opencv\build\include\opencv2\features2d\features2d.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/flann/miniflann.hpp"
+	<limits>
+
+1364597757 f:\programs\opencv\opencv\build\include\opencv2\flann\miniflann.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/flann/defines.h"
+
+1359328673 f:\programs\opencv\opencv\build\include\opencv2\flann\defines.h
+	"config.h"
+
+1359328673 f:\programs\opencv\opencv\build\include\opencv2\flann\config.h
+
+1364597757 f:\programs\opencv\opencv\build\include\opencv2\calib3d\calib3d.hpp
+	"opencv2/core/core.hpp"
+	"opencv2/features2d/features2d.hpp"
+
+1376184161 f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leafparse_emp.h
+	"Leafparse.h"
+
+1376184161 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\learn_opencv\leafparse_emp.cpp
+	"Leafparse_emp.h"
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+	<iostream>
+

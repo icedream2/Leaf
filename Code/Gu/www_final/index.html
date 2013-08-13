@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.actionsheet.css" />
+	<script src="javascript/jquery-1.8.2.min.js"></script>
+	<script src="javascript/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/cordova.js"></script>
+	<script type="text/javascript" src="javascript/jquery.mobile.actionsheet.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+	$(document).bind("mobileinit", function() {
+
+		$.support.cors = true;
+
+		$.mobile.allowCrossDomainPages = true;
+
+	});
+
+	var pictureSource; 
+	var destinationType; 
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+
+		pictureSource = navigator.camera.PictureSourceType;
+
+		destinationType = navigator.camera.DestinationType;
+
+	}
+	function onPhotoDataSuccess(imageData) {
+	 smallImage = document.getElementById('smallImage');
+
+		smallImage.style.display = 'block';
+
+
+		smallImage.src = imageData;
+
+	}
+
+
+	function onPhotoURISuccess(imageURI) {
+
+
+		var largeImage = document.getElementById('largeImage');
+
+		largeImage.style.display = 'block';
+
+
+		largeImage.src = imageURI;
+
+	}
+
+
+	function capturePhoto() {
+
+
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+
+			quality : 50,
+
+			destinationType : navigator.camera.DestinationType.FILE_URI,	
+
+			sourceType : Camera.PictureSourceType.CAMERA,
+
+			allowEdit : true,
+
+			encodingType : Camera.EncodingType.JPEG,
+
+			popoverOptions : CameraPopoverOptions,
+
+			saveToPhotoAlbum : true
+
+		});
+
+	}
+
+	function capturePhotoEdit() {
+
+
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+
+			quality : 50,
+
+			allowEdit : true,
+
+			destinationType : destinationType.DATA_URL,
+
+			saveToPhotoAlbum : true
+
+		});
+
+	}
+
+
+	function getPhoto(source) {
+
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+
+			quality : 50,
+
+			destinationType : destinationType.FILE_URI,//这里要用FILE_URI，才会返回文件的URI地址
+
+			sourceType : source
+
+		});
+
+	}
+
+
+	function onFail(message) {
+
+		alert('Failed because: ' + message);
+
+	}
+
+	function uploadPhoto(imageURI) {
+
+		var options = new FileUploadOptions();
+		
+		options.fileKey = "fileAddPic";//用于设置参数，对应form表单里控件的name属性，这是关键，废了一天时间，完全是因为这里，这里的参数名字，和表单提交的form对应
+
+		options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+		
+
+		//如果是图片格式，就用image/jpeg，其他文件格式上官网查API
+
+		options.mimeType = "image/jpeg";
+
+		var uri = encodeURI("http://192.168.168.225:8080/MWAPI/PhonegapServlet");
+
+		options.chunkedMode = false;
+
+		var ft = new FileTransfer();
+
+		ft.upload(imageURI, uri, win, fail, options);
+
+	}
+
+	function win(r) {
+
+		alert("上传成功");
+
+		var response = r.response;
+
+
+		var message = eval("(" + r.response + ")").message;
+
+		$("#_picFile").val(message);
+
+		var imageURI = CONSTANT['context'] + message;
+
+		onPhotoDataSuccess(imageURI);
+
+		onPhotoURISuccess(imageURI);
+
+		console.log("Code = " + r.responseCode);
+
+		console.log("Response = " + r.response);
+
+		console.log("Sent = " + r.bytesSent);
+
+	}
+
+	function fail(error) {
+
+		alert("An error has occurred: Code = " + error.code);
+
+		alert("upload error source " + error.source);
+
+		alert("upload error target " + error.target);
+
+		console.log("upload error source " + error.source);
+
+		console.log("upload error target " + error.target);
+
+	}
+	 </script>  
+
+</head> 
+<body>
+
+	<!-- page write -->
+
+	<div data-role="page" id="page1" >
+	 <!-- header -->  
+	<header data-role="header" class="ui-header ui-bar-c" role="banner">
+    <div>
+			<a class="ui-btn-left" href="#">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+			</a>
+     </div>
+			<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+      <div>
+			<a class="ui-btn-right" onclick=";" href="#">
+				<img style="height:32px; width:32px;" src="images/2.png"/>
+			</a>
+       </div>
+	</header>
+           
+        <!-- content -->  
+
+	<div data-role="content" data-theme="c">
+		
+               <a style="text-align:center;margin-top:100px; " data-role="actionsheet">
+				<img id="imgid" src="images/4.png" style="width:90%;"/></a>  
+            <div>
+                <a data-role="button" id="capturePhoto" href="#" onClick="capturePhoto()">用照相机拍照</a>
+                <a data-role="button" id="getPhoto" href="#" onClick="getPhoto(pictureSource.PHOTOLIBRARY);">从本地相册选取一张</a>
+                <br/>
+                <a data-role="button" data-rel="close" href="#">取消</a>
+            </div>		
+			
+     </div>   
+      <!-- footer --> 
+    
+     
+        
+</div>
+
+</body>
+
+</html>

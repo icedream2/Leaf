@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1375408038 source:f:\projects\leaf_in_mind\yrui_leaf\code\wu\leaf-client\main.cpp
+	<iostream>
+	<fstream>
+	<iterator>
+	<boost/asio.hpp>
+	<boost/filesystem.hpp>
+

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+	<script>
+		$( function(){
+			$("#brief_img").bind("tap", briefTapHandler);
+			alert("B");
+			function briefTapHandler(event){
+			alert("A");
+				$.mobile.changePage("#detail", {
+					transition: "slideup",
+					reverse: false,
+					changeHash: false
+				});
+			}
+		});
+	</script>
+	<body>
+	<div data-role="page" id="list">
+		<div data-role="header">
+			<a href="#" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<ul data-role="listview" data-inset="false" data-filter-placeholder="Find your CD...">
+				<li>
+					<a href="#brief" data-icon="star" data-transition="slide">
+					<img alt='' src="images/album-bb.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+				<li>
+					<a href="#brief" data-icon="star">
+					<img alt='' src="images/album-hc.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div>
+	</div>
+	<div data-role="page" id="brief">
+		<div data-role="header">
+			<a href="#" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<h2>紫罗兰</h2>
+			<h4>紫色小叶片</h4>
+			<img id="brief_img" src="images/purple.jpg"/>
+		</div>
+		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div>
+	</div>	
+	<div data-role="page" id="detail" data-transition="fade">
+		<div data-role="header">
+			<a href="#" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<h2>Hello，大家好。</h2>
+			<h4>我是小熊</h4>
+		</div>
+		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div>
+	</div>
+	
+
+</body>
+
+</html>

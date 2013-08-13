@@ -1,0 +1,10 @@
+1:<trace>Instantiate identifier
+2:<trace>Load existing classifiers
+3:<trace>Init server
+4:<trace>Run server
+5:<trace>A new task is issued
+6:<trace>Read from remote
+7:<trace>Get a image
+8:<trace>Retrieve contour
+9:<trace>Get contour
+10:<trace>Retrieve image feature

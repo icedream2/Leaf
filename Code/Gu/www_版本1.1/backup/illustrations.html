@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+	-->
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.actionsheet.css" />
+	<script src="javascript/jquery-1.8.2.min.js"></script>
+	<script src="javascript/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/cordova.js"></script>
+	<script type="text/javascript" src="javascript/jquery.mobile.actionsheet.js"></script>	
+</head>
+<body>
+	<div data-role="page" id="home">
+		<div data-role="header">
+			<a href="#" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+			<p><a href="#about"  data-rel="dialog" data-transition="slideup">About this APP</a></p>
+			<div class="ui-grid-a">
+				<div class="ui-grid-c">
+					<div class="ui-block-a"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#one_kind"><img src="images/sample.jpg"/></a></div>
+				</div>
+			</div>
+		</div>
+		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div>
+	</div>
+	<div data-role="page" id="one_kind">  
+		<div data-role="header">
+			<a href="#home" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <h2>紫罗兰</h2>
+		  <span>乔梁喜欢的紫色小叶片</span>
+		  <a href="#home" onclick="alert('A');">哦，点我，宝贝！</a>   
+		</div>
+ 		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div> 
+	</div>	
+	<div data-role="page" id="about">  
+		<div data-role="header">
+			<a href="#home" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>This app rocks! <a href="#home" onclick="alert('A');">Go home</a></p>    
+		</div>
+ 		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div> 
+	</div>
+</body>
+
+</html>

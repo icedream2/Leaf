@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />
+	<link rel="stylesheet" href="css/jquery.mobile.actionsheet.css" />
+	<script src="javascript/jquery-1.8.2.min.js"></script>
+	<script src="javascript/jquery.mobile-1.3.1.min.js"></script>
+	<script type="text/javascript" src="javascript/cordova.js"></script>
+	<script type="text/javascript" src="javascript/jquery.mobile.actionsheet.js"></script>
+	<script>
+		$( function(){
+			$("#brief_img").bind("tap", briefTapHandler);
+			//alert("B");
+			function briefTapHandler(event){
+			//alert("A");
+				$.mobile.changePage("#listitem_detail", {
+					transition: "slideup",
+					reverse: false,
+					changeHash: false
+				});
+			}
+		});
+	</script>
+    <script type="text/javascript" charset="utf-8">
+	$(document).bind("mobileinit", function() {
+		$.support.cors = true;
+		$.mobile.allowCrossDomainPages = true;
+	});
+
+	var pictureSource; 
+	var destinationType; 
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		pictureSource = navigator.camera.PictureSourceType;
+		destinationType = navigator.camera.DestinationType;
+	}
+	function onPhotoDataSuccess(imageData) {
+	 smallImage = document.getElementById('smallImage');
+		smallImage.style.display = 'block';
+		smallImage.src = imageData;
+	}
+
+
+	function onPhotoURISuccess(imageURI) {
+		var largeImage = document.getElementById('largeImage');
+		largeImage.style.display = 'block';
+		largeImage.src = imageURI;
+	}
+
+
+	function capturePhoto() {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			destinationType : navigator.camera.DestinationType.FILE_URI,	
+			sourceType : Camera.PictureSourceType.CAMERA,
+			allowEdit : true,
+			encodingType : Camera.EncodingType.JPEG,
+			popoverOptions : CameraPopoverOptions,
+			saveToPhotoAlbum : true
+		});
+	}
+
+	function capturePhotoEdit() {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			allowEdit : true,
+			destinationType : destinationType.DATA_URL,
+			saveToPhotoAlbum : true
+		});
+	}
+
+
+	function getPhoto(source) {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			destinationType : destinationType.FILE_URI,//这里要用FILE_URI，才会返回文件的URI地址
+			sourceType : source
+		});
+	}
+
+
+	function onFail(message) {
+		alert('Failed because: ' + message);
+	}
+
+	function uploadPhoto(imageURI) {
+		var options = new FileUploadOptions();
+		options.fileKey = "fileAddPic";//用于设置参数，对应form表单里控件的name属性，这是关键，废了一天时间，完全是因为这里，这里的参数名字，和表单提交的form对应
+		options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+		//如果是图片格式，就用image/jpeg，其他文件格式上官网查API
+		options.mimeType = "image/jpeg";
+		var uri = encodeURI("http://192.168.168.225:8080/MWAPI/PhonegapServlet");
+		options.chunkedMode = false;
+		var ft = new FileTransfer();
+		ft.upload(imageURI, uri, win, fail, options);
+	}
+
+	function win(r) {
+		alert("上传成功");
+		var response = r.response;
+		var d = eval(response); 
+		var i;
+		for(i=0; i<d.length; i++)
+			alert("Leaf" + i + ": " + d[i].name);
+		
+		var message = eval("(" + r.response + ")").message;
+		//alert(message);
+		//var imageURI = CONSTANT['context'] + message;
+		//onPhotoDataSuccess(imageURI);
+		//onPhotoURISuccess(imageURI);
+		//alert("Code = " + r.responseCode);
+		//alert("Response = " + r.response);
+		//alert("Sent = " + r.bytesSent);
+	}
+
+	function fail(error) {
+		alert("An error has occurred: Code = " + error.code);
+		alert("upload error source " + error.source);
+		alert("upload error target " + error.target);
+		console.log("upload error source " + error.source);
+		console.log("upload error target " + error.target);
+	}
+	 </script>  
+
+</head> 
+<body>
+	<div data-role="page" id="home" data-theme="c">
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div style="display:none;">
+				<a class="ui-btn-left" href="#home">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content">
+			<a href="#take_photo" data-role="button" data-icon="star">拍照查询</a>
+			<a href="#illustration_general" data-role="button" data-icon="star">图鉴系统</a>
+			<a href="#under_construct" data-role="button" data-icon="star">个人偏爱</a>
+		</div>
+	</div>
+	<div data-role="page" id="take_photo">
+	 <!-- header -->  
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div>
+				<a class="ui-btn-left" href="#home">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content" data-theme="c">
+			<a style="text-align:center;margin-top:100px; " data-role="actionsheet">
+			<img id="imgid" src="images/4.png" style="width:90%;"/></a>  
+			<div>
+			<a data-role="button" id="capturePhoto" href="#listview" onClick="capturePhoto()">用照相机拍照</a>
+			<a data-role="button" id="getPhoto" href="#listview" onClick="getPhoto(pictureSource.PHOTOLIBRARY);">从本地相册选取一张</a>
+			<br/>
+			<a data-role="button" data-rel="close" href="#take_photo">取消</a>
+			</div>		
+		 </div>   
+
+	</div>
+	<div data-role="page" id="illustration_general">
+	<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div>
+				<a class="ui-btn-left" href="#home">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content"> 
+			<p><a href="#about"  data-rel="dialog" data-transition="slideup">About this APP</a></p>
+			<div class="ui-grid-a">
+				<div class="ui-grid-c">
+					<div class="ui-block-a"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one"><img src="images/sample.jpg"/></a></div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div data-role="page" id="illustration_one">  
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div>
+				<a class="ui-btn-left" href="#illustration_general">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content"> 
+		  <h2>紫罗兰</h2>
+		  <span>乔梁喜欢的紫色小叶片</span>
+		  <a href="#home">哦，点我，宝贝！</a>   
+		</div>
+
+	</div>
+	<div data-role="page" id="listview">
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div >
+				<a class="ui-btn-left" href="#take_photo">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content" role="main"> 
+			<ul data-role="listview" data-inset="false" data-filter-placeholder="Find your CD...">
+				<li>
+					<a href="#listitem_brief" data-icon="star" data-transition="slide">
+					<img alt='' src="images/album-bb.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+				<li>
+					<a href="#listitem_brief" data-icon="star">
+					<img alt='' src="images/album-hc.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<div data-role="page" id="listitem_brief">
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div >
+				<a class="ui-btn-left" href="#listview">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content" role="main"> 
+			<h2>紫罗兰</h2>
+			<h4>紫色小叶片</h4>
+			<img id="brief_img" src="images/purple.jpg"/>
+		</div>
+
+	</div>	
+	<div data-role="page" id="listitem_detail">
+		<header data-role="header" class="ui-header ui-bar-c" role="banner">
+			<div >
+				<a class="ui-btn-left" href="#listitem_brief">
+					<img style="height:32px; width:32px;" src="images/1.png"/>
+				</a>
+			</div>
+				<h1 class="ui-title" tabindex="0" role="heading" aria-level="1"></h1>
+			<div>
+				<a class="ui-btn-right" onclick=";" href="#config">
+					<img style="height:32px; width:32px;" src="images/2.png"/>
+				</a>
+			</div>
+		</header>
+		<div data-role="content" role="main"> 
+			<h2>Hello，大家好。</h2>
+			<h4>我是小熊</h4>
+		</div>
+
+	</div>
+	
+	<div data-role="page" id="about">  
+		<div data-role="header">
+			<a href="#home" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>叶子</h1>
+			<a href="#config" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>This app rocks! <a href="#home" onclick="alert('A');">Go home</a></p>    
+		</div>
+
+	</div>    
+	
+	<div data-role="page" id="under_construct">  
+		<div data-role="header">
+			<a href="#home" data-icon="home" class="ui-btn-left">主页</a>
+		 	<h1>叶子</h1>
+			<a href="#config" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>Sorry,this page is under development. :(<a href="#home">Go home</a></p>    
+		</div>
+
+	</div>    	
+ 
+	<div data-role="page" id="config">  
+		<div data-role="header">
+			<a href="#home" data-icon="home" class="ui-btn-left">主页</a>
+		 	<h1>叶子</h1>
+			<a href="#config" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>This page shows the configuration<a href="#home">Go home</a></p>    
+		</div>
+ 
+	</div>    
+</div>
+
+</body>
+
+</html>

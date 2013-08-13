@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="leaf-client" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="F:/Projects/Leaf_in_mind/Yrui_leaf/Code/Wu/App/Debug/leaf-client" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="F:/Projects/Leaf_in_mind/Yrui_leaf/Code/Wu/App/Debug" />
+				<Option object_output="obj/debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="F:/Programs/OpenCV/opencv/build/include" />
+				</Compiler>
+				<Linker>
+					<Add library="D:\Programming\C++\boost\stage\libboost_system-mgw47-mt-d-1_54.a" />
+					<Add library="F:\Programs\CodeBlocks\MinGW\lib\libwsock32.a" />
+					<Add library="F:\Programs\CodeBlocks\MinGW\lib\libws2_32.a" />
+					<Add library="D:\Programming\C++\boost\stage\libboost_filesystem-mgw47-mt-d-1_54.a" />
+					<Add library="F:\Programs\OpenCV\opencv\cb-mingw\lib\libopencv_core245.dll.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="app/release/leaf-client" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

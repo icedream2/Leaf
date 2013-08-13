@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Leaf">
+		<Project filename="yrui-leaf/yrui-leaf.cbp" />
+		<Project filename="leaf-trainer/leaf-trainer.cbp" />
+		<Project filename="leaf-server/leaf-server.cbp" />
+		<Project filename="leaf-client/leaf-client.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

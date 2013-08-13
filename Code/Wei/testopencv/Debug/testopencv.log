@@ -1,0 +1,17 @@
+﻿生成启动时间为 2013/7/3 14:39:37。
+     1>项目“C:\Users\Princy\Desktop\testopencv\testopencv\testopencv.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在对“Debug\testopencv.unsuccessfulbuild”执行 Touch 任务。
+       ClCompile:
+         所有输出均为最新。
+       ManifestResourceCompile:
+         所有输出均为最新。
+       Link:
+         D:\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Princy\Desktop\testopencv\Debug\testopencv.exe" /INCREMENTAL /NOLOGO opencv_calib3d245d.lib opencv_contrib245d.lib opencv_core245d.lib opencv_features2d245d.lib opencv_flann245d.lib opencv_gpu245d.lib opencv_highgui245d.lib opencv_imgproc245d.lib opencv_legacy245d.lib opencv_ml245d.lib opencv_objdetect245d.lib opencv_ts245d.lib opencv_video245d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\testopencv.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Princy\Desktop\testopencv\Debug\testopencv.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Princy\Desktop\testopencv\Debug\testopencv.lib" /MACHINE:X64 Debug\testopencv.exe.embed.manifest.res
+         Debug\g.obj
+     1>Debug\g.obj : fatal error LNK1112: 模块计算机类型“X86”与目标计算机类型“x64”冲突
+     1>已完成生成项目“C:\Users\Princy\Desktop\testopencv\testopencv\testopencv.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:00.36

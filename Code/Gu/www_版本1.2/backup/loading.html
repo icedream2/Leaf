@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head> 
+<body>
+	<div data-role="page">
+		<div data-role="header">
+		 	<a href="#" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content">
+			<div data-role="content">
+			<div data-role="controlgroup">
+			  <div id="brief_img" class="show-page-loading-msg" data-theme="a" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-icon="arrow-r" data-iconpos="right">Text only</div>
+			  <div id="brief_img2" class="hide-page-loading-msg" data-icon="delete" data-iconpos="right">Hide</div>
+			</div> 
+		  </div>
+		</div>
+		<div data-role="footer">
+			<h4>My Footer</h4>
+		</div>
+	</div>
+</body>
+
+<script>
+$( function(){
+			$("#brief_img").bind("tap", briefTapHandler);
+			//alert("B");
+			function briefTapHandler(event){
+				//alert("A");
+				$.mobile.loading( 'show', {
+					text: "foo",
+					textVisible: true,
+					theme: "b",
+					html: ""
+				});
+			}
+			
+			$("#brief_img2").bind("tap", briefTapHandler2);
+			//alert("B");
+			function briefTapHandler2(event){
+			//alert("A");
+				$.mobile.loading( "hide" );
+			}
+		});
+</script>
+
+
+</html>

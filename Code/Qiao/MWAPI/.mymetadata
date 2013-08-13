@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="MWAPI"
+  id="myeclipse.1374715554384"
+  context-root="/MWAPI"
+  j2ee-spec="5.0"
+  archive="MWAPI.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

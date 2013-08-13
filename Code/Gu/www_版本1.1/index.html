@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html>
+<head> 
+	<title>Test 1 2 3</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+	<!--<link rel="stylesheet" href="css/jquery.mobile-1.3.1.css" />-->
+	<link rel="stylesheet" href="css/jquery.mobile.actionsheet.css" />
+	 <link rel="stylesheet" type="text/css" href="jquery.mobile.flatui.css" />
+	<!--<link rel="stylesheet" href="css/site.css" />-->
+	<script src="javascript/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="javascript/cordova.js"></script>
+	<script type="text/javascript" src="javascript/jquery.mobile.actionsheet.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+	<script>
+		$( function(){
+			$("#brief_img").bind("tap", briefTapHandler);
+			//alert("B");
+			function briefTapHandler(event){
+			//alert("A");
+				$.mobile.changePage("#listitem_detail", {
+					transition: "slideup",
+					reverse: false,
+					changeHash: false
+				});
+			}
+			/*
+			var p_h = $(window).height();
+			alert(p_h);
+			var h = $("#photo_img").height();
+			alert(h);
+			*//*
+			var width = $("#img_holder").width();
+			$("#photo_img").css({
+				"max-width": width,
+				"height": "auto",
+				"margin-top": "25%"
+			});
+			
+			*/
+		});
+		
+		
+	</script>
+    <script type="text/javascript" charset="utf-8">
+	$(document).bind("mobileinit", function() {
+		$.support.cors = true;
+		$.mobile.allowCrossDomainPages = true;
+	});
+
+	var pictureSource; 
+	var destinationType; 
+	document.addEventListener("deviceready", onDeviceReady, false);
+
+	function onDeviceReady() {
+		pictureSource = navigator.camera.PictureSourceType;
+		destinationType = navigator.camera.DestinationType;
+	}
+	function onPhotoDataSuccess(imageData) {
+	 smallImage = document.getElementById('smallImage');
+		smallImage.style.display = 'block';
+		smallImage.src = imageData;
+	}
+
+
+	function onPhotoURISuccess(imageURI) {
+		var largeImage = document.getElementById('largeImage');
+		largeImage.style.display = 'block';
+		largeImage.src = imageURI;
+	}
+
+
+	function capturePhoto() {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			destinationType : navigator.camera.DestinationType.FILE_URI,	
+			sourceType : Camera.PictureSourceType.CAMERA,
+			allowEdit : true,
+			encodingType : Camera.EncodingType.JPEG,
+			popoverOptions : CameraPopoverOptions,
+			saveToPhotoAlbum : true
+		});
+	}
+
+	function capturePhotoEdit() {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			allowEdit : true,
+			destinationType : destinationType.DATA_URL,
+			saveToPhotoAlbum : true
+		});
+	}
+
+
+	function getPhoto(source) {
+		navigator.camera.getPicture(uploadPhoto, onFail, {
+			quality : 50,
+			destinationType : destinationType.FILE_URI,//这里要用FILE_URI，才会返回文件的URI地址
+			sourceType : source
+		});
+	}
+
+
+	function onFail(message) {
+		alert('Failed because: ' + message);
+	}
+
+	function uploadPhoto(imageURI) {
+		var options = new FileUploadOptions();
+		options.fileKey = "fileAddPic";//用于设置参数，对应form表单里控件的name属性，这是关键，废了一天时间，完全是因为这里，这里的参数名字，和表单提交的form对应
+		options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+		//如果是图片格式，就用image/jpeg，其他文件格式上官网查API
+		options.mimeType = "image/jpeg";
+		var uri = encodeURI("http://192.168.168.225:8080/MWAPI/PhonegapServlet");
+		options.chunkedMode = false;
+		var ft = new FileTransfer();
+		ft.upload(imageURI, uri, win, fail, options);
+	}
+
+	function win(r) {
+		alert("上传成功");
+		var response = r.response;
+		var message = eval("(" + r.response + ")").message;
+		$("#_picFile").val(message);
+		var imageURI = CONSTANT['context'] + message;
+		onPhotoDataSuccess(imageURI);
+		onPhotoURISuccess(imageURI);
+		console.log("Code = " + r.responseCode);
+		console.log("Response = " + r.response);
+		console.log("Sent = " + r.bytesSent);
+	}
+
+	function fail(error) {
+		alert("An error has occurred: Code = " + error.code);
+		alert("upload error source " + error.source);
+		alert("upload error target " + error.target);
+		console.log("upload error source " + error.source);
+		console.log("upload error target " + error.target);
+	}
+	 </script>  
+	<style>
+		#popupBasic-popup{
+			//height:80%;
+		}
+		#popupBasic{
+			margin-left: auto;
+			margin-right: auto;
+		}
+	</style>
+</head> 
+<body>
+	<div data-role="page" id="home" data-theme="b">
+		<div data-role="panel" id="main_panel">
+			<div class="panel-content">
+				<ul data-role="listview">
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>我的账户</a></li>
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>我的偏爱</a></li>
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>最近的历史</a></li>
+					<!--<li data-role="list-divider" data-theme="a"></li>-->
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>关于我们</a></li>
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>图鉴系统</a></li>
+					<li><a href="#under_construct" data-transition="slide"><img class="ui-li-icon" src="images/icon.png"/>登出</a></li>
+				</ul>
+				<a data-rel="close" data-role="button" data-icon="delete" data-inline="true">Cancel</a>
+			</div>
+		</div>
+		<div data-role="header">
+			<a href="#main_panel" data-icon="home" class="ui-btn-left" data-transition="slide">主页</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-icon="gear" class="ui-btn-right" data-transition="slide">设置</a>
+		</div>
+		<div data-role="content">			
+			<div id="img_holder" style="margin:0 auto; text-align:center; width:80%;" >
+				<a href="#popupBasic" data-rel="popup" data-transition="slide"><img id="photo_img" style="width:100%;margin-top: 25%;" src="images/4.png"/></a> 
+			</div>
+			<div id="text_holder" style="margin:1em auto; text-align:center; width:80%;" >
+				<img id="photo_img" style="width:70%;" src="images/5.png"/>
+			</div>
+			<div data-role="popup" id="popupBasic" data-overlay-theme="a" data-transition="slide" data-position-to="window">
+			<!--<a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>-->
+			<ul data-role="listview">
+				<li><a onClick="capturePhoto()" href="#interaction" data-icon="back" data-mini="true" data-transition="slide">相机拍摄</a></li>
+				<li><a onClick="getPhoto(pictureSource.PHOTOLIBRARY);" href="#interaction" data-icon="grid" data-mini="true" data-transition="slide">本地上传</a></li>
+				<li><a onClick="" href="#" data-rel="back" data-icon="search" data-mini="true" data-transition="slide">取消</a></li>
+			</ul>
+			</div>
+			
+			
+		<!--
+			<a style="text-align:center;margin-top:100px; " data-role="actionsheet">
+			<img id="imgid" src="images/4.png" style="width:90%;"/></a>  
+			<div>
+			<a data-role="button" id="capturePhoto" href="#listview" onClick="capturePhoto()">用照相机拍照</a>
+			<a data-role="button" id="getPhoto" href="#listview" onClick="getPhoto(pictureSource.PHOTOLIBRARY);">用照相机拍照</a>
+			<br/>
+			<a data-role="button" data-rel="close" href="#take_photo">取消</a>
+			</div>
+		-->
+		 </div>   
+	</div>
+	<div data-role="page" id="interaction" data-theme="b">
+		<div data-role="header">
+			<a href="#home" data-icon="home" data-transition="slide" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#interaction_loading" data-icon="check" data-transition="slide" class="ui-btn-right">完成</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<img style="width:100%; height:100%;" src="images/purple.jpg"/>
+		</div>	
+	</div>
+
+	<div data-role="page" id="interaction_loading" data-theme="b">
+		<div data-role="header">
+			<a href="#home" data-icon="home" data-transition="slide" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#listview" data-icon="check" data-transition="slide" class="ui-btn-right">完成</a>
+		</div>
+		<div data-role="content" role="main" style="height:100%;"> 
+			<div style="top:0;left:0;height:50%; width:100%;background:url('images/purple.jpg');">			
+			</div>
+			<h2 style="margin-top:50%">上海</h2>
+			<p>北纬37°，东经108°</p>
+			<div>
+			<ul data-role="listview" data-inset="false" data-filter-placeholder="Find your CD...">
+				<li>
+					<a href="#listview" data-icon="forward" data-transition="slide">
+					<h2>直接搜索</h2>
+					<p>Hey</p>
+					<p>答案即将揭晓</p>
+					</a>
+				</li>
+				<li>
+					<a href="#listview" data-icon="forward" data-transition="slide">
+					<h2>交互式搜索</h2>
+					<p>Up</p>
+					<p>增加您的搜索精度</p>
+					</a>
+				</li>
+			</ul>
+			</div>
+		</div>			
+	</div>
+	<div data-role="page" id="listview"  ;data-theme="b">
+		<div data-role="header">
+			<a href="#take_photo" data-icon="back" data-transition="slide" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-icon="gear" data-transition="slide" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<ul data-role="listview" data-inset="false" data-filter-placeholder="Find your CD...">
+				<li>
+					<a href="#listitem_brief" data-icon="star" data-transition="slide">
+					<img alt='' src="images/album-bb.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+				<li>
+					<a href="#listitem_brief" data-transition="slide" data-icon="star">
+					<img alt='' src="images/album-hc.jpg"/>
+					<h2>Old School New Rules</h2>
+					<p>Hank Williams Jr</p>
+					<p>$9.99</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role="page" id="listitem_brief" data-theme="b">
+		<div data-role="header">
+			<a href="#listview" data-transition="slide" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-transition="slide" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<h2>紫罗兰</h2>
+			<h4>紫色小叶片</h4>
+			<img id="brief_img" src="images/purple.jpg"/>
+		</div>
+	</div>	
+	<div data-role="page" id="listitem_detail" data-theme="b">
+		<div data-role="header">
+			<a href="#listitem_brief" data-transition="slide" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-transition="slide" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content" role="main"> 
+			<h2>Hello，大家好。</h2>
+			<h4>我是小熊</h4>
+		</div>
+	</div>
+
+	<div data-role="page" id="illustration_general" data-theme="b">
+		<div data-role="header">
+			<a href="#home" data-icon="back" data-transition="slide" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-icon="gear" data-transition="slide" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+			<p><a href="#about" data-rel="dialog" data-transition="slide">About this APP</a></p>
+			<div class="ui-grid-a">
+				<div class="ui-grid-c">
+					<div class="ui-block-a"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-a"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-b"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-c"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+					<div class="ui-block-d"><a href="#illustration_one" data-transition="slide"><img src="images/sample.jpg"/></a></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div data-role="page" id="illustration_one" data-theme="b">  
+		<div data-role="header">
+			<a href="#illustration_general" data-transition="slide" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-transition="slide" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <h2>紫罗兰</h2>
+		  <span>乔梁喜欢的紫色小叶片</span>
+		  <a href="#home" data-transition="slide">哦，点我，宝贝！</a>   
+		</div>
+	</div>
+	
+	<div data-role="page" id="about" data-theme="b">  
+		<div data-role="header">
+			<a href="#home" data-transition="slide" data-icon="back" class="ui-btn-left">返回</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-transition="slide" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>This app rocks! <a href="#home" data-transition="slide" onclick="alert('A');">Go home</a></p>    
+		</div>
+	</div>    
+	
+	<div data-role="page" id="under_construct" data-theme="b">  
+		<div data-role="header">
+			<a href="#home" data-transition="slide" data-icon="home" class="ui-btn-left">主页</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-transition="slide" data-icon="gear" class="ui-btn-right">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>Sorry,this page is under development. :(<a data-transition="slide" href="#home">Go home</a></p>    
+		</div>
+	</div>    	
+  
+	<div data-role="page" id="config" data-theme="b">  
+		<div data-role="header">
+			<a href="#home" data-icon="home" class="ui-btn-left" data-transition="slide">主页</a>
+		 	<h1>My Title</h1>
+			<a href="#config" data-icon="gear" class="ui-btn-right" data-transition="slide">设置</a>
+		</div>
+		<div data-role="content"> 
+		  <p>This page shows the configuration<a data-transition="slide" href="#home">Go home</a></p>    
+		</div> 
+	</div>    
+</div>
+
+</body>
+
+</html>
